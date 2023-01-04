@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require('mongoose')
 
 const FormationSchema = new mongoose.Schema({
         title : {
@@ -24,4 +24,4 @@ const FormationSchema = new mongoose.Schema({
 
 })
 
-export default FormationSchema
+module.exports = mongoose.model('Formations', FormationSchema)

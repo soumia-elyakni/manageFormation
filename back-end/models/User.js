@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require('mongoose')
 
 const UserSchema = new mongoose.Schema({
     first_name : {
@@ -25,18 +25,18 @@ const UserSchema = new mongoose.Schema({
 
     role_id : {
         type: mongoose.Schema.Types.ObjectId,
-        ref: RoleSchema
+        ref: "Roles"
     },
 
     organisme_id : {
         type: mongoose.Schema.Types.ObjectId,
-        ref: OrganismeSchema
+        ref: "Organismes"
     },
 
     formation_id : {
         type: mongoose.Schema.Types.ObjectId,
-        ref: FormationSchema
+        ref: "Formations"
     },
 })
 
-export default UserSchema
+module.exports = mongoose.model('Users', UserSchema)

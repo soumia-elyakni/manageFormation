@@ -1,14 +1,11 @@
-import mongoose from "mongoose";
+const mongoose = require('mongoose')
 
-const RoleSchema = new mongoose.Schema(
-    {
-        name: {
-            type: String,
-        },
-    },
-    {
-        timestamps: true,
+const RoleSchema = new mongoose.Schema({
+    name: {
+        type: String,
     }
+}
 )
 
-export default RoleSchema
+
+module.exports = mongoose.model('Roles', RoleSchema)

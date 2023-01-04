@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require('mongoose')
 
 const OrganismeSchema = new mongoose.Schema({
         name : {
@@ -20,4 +20,4 @@ const OrganismeSchema = new mongoose.Schema({
 
 })
 
-export default OrganismeSchema
+module.exports = mongoose.model('Organismes', OrganismeSchema)
