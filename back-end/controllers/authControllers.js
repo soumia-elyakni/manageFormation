@@ -26,7 +26,7 @@ const Login = async(req, res) => {
     storage("token", token)    
     res.json({ 
                 first_name: userExist.first_name,
-                last_name: userExist.first_name, 
+                last_name: userExist.last_name, 
                 role: role.name, 
                 token: storage("token") })
                 
