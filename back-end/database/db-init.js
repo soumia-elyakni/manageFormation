@@ -37,7 +37,7 @@ const creatRolesData = async() => {
       };
  
 
-      const creatFirstAdmin = async() => {
+const creatFirstAdmin = async() => {
         const user = await Users.findOne({email: FirstAdmin.email});
         if (!user) {
           const salt = bcrypt.genSaltSync(10);
@@ -51,7 +51,7 @@ const creatRolesData = async() => {
             res.send(err);
           });
         } else {
-          process.exit(1);
+          console.log('Admin existed');
         }
       };
      
