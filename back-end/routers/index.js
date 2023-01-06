@@ -6,7 +6,7 @@ const employeRoute = require('./employeRoutes')
 
 
 module.exports = {
-    authRoute
-    // adminRoute,
+    authRoute,
+    adminRoute,
     // employeRoute
 }
