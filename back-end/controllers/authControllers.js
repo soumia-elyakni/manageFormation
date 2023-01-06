@@ -24,7 +24,7 @@ const Login = async(req, res) => {
                 }, process.env.TOKEN_CODE)
     
     storage("token", token)    
-    res.json({ 
+    res.send({ 
                 first_name: userExist.first_name,
                 last_name: userExist.last_name, 
                 role: role.name, 
@@ -32,10 +32,16 @@ const Login = async(req, res) => {
                 
     
     const name = userExist.first_name
-    console.log('hello' + name)
+    console.log('Hello ' + name)
 }
+
+const Logout = async (req, res) => {
+    storage.clear();
+    res.send({ message: "User is logouted" });
+  };
 
 
 module.exports = {
-    Login
+    Login,
+    Logout
 }
