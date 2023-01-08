@@ -6,8 +6,7 @@ const FormationSchema = new mongoose.Schema({
         },
 
         image :{
-            type : String,
-            default: "default.jpg"
+            type : Array,
         },
 
         description : {
