@@ -21,6 +21,13 @@ const FormationSchema = new mongoose.Schema({
             type : Date
         },
 
+        status :{
+            type : String,
+            enum: ['Prévue', 'En cours','Terminée'],
+            default : "Prévue"
+
+        }
+
 })
 
 module.exports = mongoose.model('Formations', FormationSchema)
