@@ -1,6 +1,9 @@
 const Users = require("../models/User");
 const Roles = require("../models/Role");
-const Organismes = require("../models/Organismes");
+const Organismes = require("../models/Organismes")
+const Formations = require("../models/Formations")
+const formationHistory = require('../models/FormationHistory')
+const {generateNewAssignement} = require("./formationHistoryControllers")
 
 const bcrypt = require("bcrypt");
 const storage = require("local-storage")
@@ -36,4 +39,30 @@ const addEmploye = async (req, res) => {
   
 };
 
-module.exports = {  addEmploye }
+  const newUserFormation = async(req, res) => {
+
+    const { userId } = req.params;
+    const { body } = req
+    const title = body.title
+
+
+    const formationInfos = await Formations.findOne({ title : title});
+    const formationId = formationInfos._id
+
+    const user = Users.findOne({_id : userId})
+    const currentFormation = Formations.findOne({_id : user.formation_id})
+    if(currentFormation.status != "Terminée") throw Error ("l'employé est dejà engagé par une formation")
+
+    
+
+    const newFormation = await Users.findOneAndUpdate({"_id": userId },  { $set: { formation_id: formationId } })
+    if(!newFormation)  throw Error('formation non assigné')
+    await generateNewAssignement(userId, formationId)
+
+
+  }
+
+module.exports = {  
+  addEmploye,
+  newUserFormation
+ }
