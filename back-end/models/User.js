@@ -35,7 +35,8 @@ const UserSchema = new mongoose.Schema({
 
     formation_id : {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Formations"
+        ref: "Formations",
+        default : null
     },
 })
 
