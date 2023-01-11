@@ -3,11 +3,13 @@ const app = express()
 const dotenv = require('dotenv').config()
 const initData = require('./database/db-init')
 const routes = require('./routers/index')
+const {dailyUpdates} = require('./tasks/update-status')
 
 
 
 
 initData()
+dailyUpdates()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 
