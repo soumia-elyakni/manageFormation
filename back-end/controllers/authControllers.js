@@ -3,7 +3,6 @@ const Roles = require('../models/Role')
 
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const storage = require("local-storage");
 
 const Login = async(req, res) => {
     const { body } = req;
@@ -23,20 +22,19 @@ const Login = async(req, res) => {
                     role : role.name
                 }, process.env.TOKEN_CODE)
     
-    storage("token", token)    
+    res.setHeader("Authorization", 'Bearer ' + token)  
+    console.log("Authorization : Bearer " + token);
+   
     res.send({ 
                 first_name: userExist.first_name,
                 last_name: userExist.last_name, 
                 role: role.name, 
-                token: storage("token") })
-                
+                token: ("Authorization : Bearer " + token) })
     
-    const name = userExist.first_name
-    console.log('Hello ' + name)
 }
 
 const Logout = async (req, res) => {
-    storage.clear();
+    res.removeHeader("Authorization");
     res.send({ message: "User is logouted" });
   };
 
