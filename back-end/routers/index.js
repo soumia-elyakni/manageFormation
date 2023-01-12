@@ -8,5 +8,5 @@ const employeRoute = require('./employeRoutes')
 module.exports = {
     authRoute,
     adminRoute,
-    // employeRoute
+    employeRoute
 }
