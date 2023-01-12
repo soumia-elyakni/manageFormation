@@ -14,13 +14,19 @@ const {
     addFormation
 } = require('../controllers/formationControllers')
 
+const {
+        authenticate,
+        checkAdmin
+} = require('../middlewares/auth')
+
 const {tryCatch} =require('../middlewares/try-catch')
 
 
-router.post('/add-employe', tryCatch(addEmploye))
-router.post('/add-organisme', tryCatch(addOrganisme))
-router.post('/add-formation', uploade.single('image') ,tryCatch(addFormation))
-router.put('/new-userFormation/:userId', tryCatch(newUserFormation))
+
+router.post('/add-employe', authenticate, checkAdmin, tryCatch(addEmploye))
+router.post('/add-organisme', authenticate, checkAdmin, tryCatch(addOrganisme))
+router.post('/add-formation', authenticate, checkAdmin, uploade.single('image') ,tryCatch(addFormation))
+router.put('/new-userFormation/:userId', authenticate, checkAdmin, tryCatch(newUserFormation))
 
 
 module.exports = router
