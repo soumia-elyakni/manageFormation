@@ -1,5 +1,6 @@
 import "./App.css";
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import Login from "./components/pages/auth/Login"
 
 import { Provider } from "react-redux";
 import store from "./store";
@@ -8,9 +9,7 @@ function App() {
   return (
     <Provider store={store}>
       <Router>
-      <div className="App">
-        <h1>hello</h1>
-      </div>
+      <Route path="/login" element={<Login />} />
       </Router>
     </Provider>
   );
