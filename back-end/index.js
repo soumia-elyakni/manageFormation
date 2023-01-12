@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/auth', routes.authRoute)
 app.use('/api/admin', routes.adminRoute)
-// app.use('/api/emp', routes.employeRoute)
+app.use('/api/emp', routes.employeRoute)
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
