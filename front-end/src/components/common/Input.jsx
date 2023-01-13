@@ -1,7 +1,15 @@
 import React from 'react'
 
-export const Input = (type, value, className, onChange) => {
+export const Input = props => {
   return (
-    <input type={type} value={value} onChange={onChange} className={`w-full px-2 pb-1.5 text-primary outline-none text-base font-light rounded-md` + className } />
+    <input
+      type={props.type}
+      value={props.value}
+      onChange={props.onChange}
+      name={props.name}
+      className={`w-full px-2 pb-1.5 text-primary outline-none text-base font-light rounded-md ${props.className}`}
+    />
   )
 }
+
+
