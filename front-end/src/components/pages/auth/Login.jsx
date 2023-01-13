@@ -1,75 +1,52 @@
-import React from 'react'
-// import { useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { Redirect } from "react-router-dom";
 import { useState } from 'react'
 import { login } from '../../../services/auth-sercives'
-import Button from '../../common/Button'
+import { loginFailed, loginSuccess } from '../../../actions/auth-actions'
 import { Input } from '../../common/Input'
+import Button from '../../common/Button'
 
-const Login = () => {
-  const [data,setData] = useState({
-    email:"",
-    password:""
-});
+function Login() {
+  const [formData, setFormData] = useState({ email: '', password: '' })
+  const dispatch = useDispatch()
+  const newError = useSelector(state => state.auth.error)
+  let dash
 
-const changeHandler = e => {
-
-  setData({...data,[e.target.name]:[e.target.value]});
-  
+  const handleChange = event => {
+    setFormData({ ...formData, [event.target.name]: event.target.value })
   }
 
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        login(email, password)
-        .then((response) => {
-          if (!response.data.authorisation) {
-            dispatch(loginFailed(response.data.message));
-          } else {
-            const token = response.data.token;
-            const decode = decodeJWT(token);
-            const payload = {
-              id: decode.id,
-              user: response.data,
-            };
-            if (!payload) {
-              dispatch(loginFailed("Token is not valid"));
-            } else {
-              dispatch(loginSuccess(payload));
-            }
+  const handleSubmit = (event) => {
+    event.preventDefault()
+       login(formData.email, formData.password)
+      .then(response => {
+        if (response.status === 200) {
+           dispatch(loginSuccess(response.data))
+           console.log(response.data)
+          if (response.data.role === 'admin') {
+             dash = ('/admin')
+          } else { 
+             dash = ('/employe')
           }
-        })
-        .catch((error) => {
-          console.error(error);
-          dispatch(loginFailed(error.message));
-        });
-    }
+       } else {
+          dispatch(loginFailed(response.error.message))
+          
+        }
+      })
+      .catch(error => {
+        dispatch(loginFailed(error.message))
+      
+      })
+  }
 
   return (
-      <form action="">
-      <Input
-      type = 'email'
-      className='border-grey m-[5px]'
-      value = {email}
-      onChange = {changeHandler}
-      name = 'email'
-
-      ></Input>
-
-    <Input
-      type = 'password'
-      className='border-grey m-[5px]'
-      value = {password}
-      onChange = {changeHandler}
-      name = 'password'
-
-      ></Input>
-
-      <Button 
-        type= "submit"
-        className='bg-blue-500'
-        onClick={handleSubmit}
-        > Login </Button>
-      </form>
+    <form onSubmit={handleSubmit} Redirect to={dash}>
+    <Input type="email" name="email" value={formData.email} onChange={handleChange} />
+    <Input type="password" name="password" value={formData.password} onChange={handleChange} />
+    <Button type="submit" className="bg-green-500" value="Login"/>
+     
+     <div>{newError && <div>{newError}</div>} </div> 
+  </form>
   )
 }
 
