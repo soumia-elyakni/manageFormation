@@ -7,13 +7,13 @@ const jwt = require("jsonwebtoken");
 const Login = async(req, res) => {
     const { body } = req;
 
-    if (!body.email || !body.password) throw Error("Fill all Inputs")
+    if (!body.email || !body.password) res.status(400).send({ error: "Fill all Inputs" })
 
     const userExist = await Users.findOne({email : body.email})
-    if(!userExist) throw Error("User email not existed")
+    if(!userExist) res.status(400).send({ error: "User email not existed" })
 
     const rightPassword = await bcrypt.compare(body.password, userExist.password)
-    if(!rightPassword) throw Error("Wrong Password")
+    if(!rightPassword) res.status(400).send({error : "Wrong Password"})
 
     const role = await Roles.findOne({_id : userExist.role_id})
 
@@ -23,9 +23,9 @@ const Login = async(req, res) => {
                 }, process.env.TOKEN_CODE)
     
     res.setHeader("Authorization", 'Bearer ' + token)  
-    console.log("Authorization : Bearer " + token);
+    // console.log("Authorization : Bearer " + token);
    
-    res.send({ 
+    res.status(200).send({ 
                 first_name: userExist.first_name,
                 last_name: userExist.last_name, 
                 email : userExist.email,
