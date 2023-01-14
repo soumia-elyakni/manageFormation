@@ -15,8 +15,10 @@ const authenticate = (req, res, next) => {
 };
 
 const checkAdmin = async (req, res, next) => {
-  const role = await Roles.findOne({ _id: req.user.role_id });
-  if (role.name !== "admin") throw Error("Unauthorized");
+  const userRole = req.user.role;
+  if (userRole !== "admin") {
+      return res.status(401).send("Unauthorized");
+  }
   next();
 };
 
