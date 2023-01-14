@@ -23,14 +23,12 @@ const Login = async(req, res) => {
                 }, process.env.TOKEN_CODE)
     
     res.setHeader("Authorization", 'Bearer ' + token)  
-    // console.log("Authorization : Bearer " + token);
+
    
     res.status(200).send({ 
-                first_name: userExist.first_name,
-                last_name: userExist.last_name, 
-                email : userExist.email,
-                role: role.name, 
-                token: ("Authorization : Bearer " + token) })
+                role: role.name,
+                token : ("Authorization", 'Bearer ' + token)
+             })
     
 }
 
