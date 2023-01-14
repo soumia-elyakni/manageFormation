@@ -23,7 +23,7 @@ const {
 const {tryCatch} =require('../middlewares/try-catch')
 
 
-router.get('/admin', authenticate, tryCatch(getUserById))
+router.get('/getUser', authenticate, tryCatch(getUserById))
 router.post('/add-employe', authenticate, checkAdmin, tryCatch(addEmploye))
 router.post('/add-organisme', authenticate, checkAdmin, tryCatch(addOrganisme))
 router.post('/add-formation', authenticate, checkAdmin, uploade.single('image') ,tryCatch(addFormation))
