@@ -26,9 +26,6 @@ res.send("created")
 
 const updateStatus = (startDate, endDate) => {
   const currentDate = new Date();
-  // console.log("current date: ", currentDate)
-  // console.log("debut date: ", startDate)
-  // console.log("fin date: ", endDate)
   let newStatus;
 
   if (currentDate.getTime() < startDate.getTime()) {
@@ -38,7 +35,7 @@ const updateStatus = (startDate, endDate) => {
   } else if (currentDate.getTime() > endDate.getTime()) {
     newStatus =   'Terminée';
   }
-  // console.log(status)
+
   return newStatus
 }
 
