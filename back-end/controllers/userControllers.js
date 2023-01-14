@@ -59,10 +59,22 @@ const addEmploye = async (req, res) => {
     if(!newFormation)  throw Error('formation non assigné')
     await generateNewAssignement(userId, formationId)
 
+  }
 
+  const getUserById = async(req,res) => {
+    const id = req.user.id
+    const user = await Users.findById(id)
+    const role = await Roles.findOne({_id : user.role_id})
+    res.status(200).send({
+      email : user.email,
+      first_name : user.first_name,
+      last_name : user.last_name,
+      role: role.name, 
+    })
   }
 
 module.exports = {  
   addEmploye,
-  newUserFormation
+  newUserFormation,
+  getUserById
  }
