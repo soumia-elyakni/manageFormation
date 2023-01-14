@@ -1,4 +1,6 @@
 const FormationHistory = require("../models/FormationHistory");
+const Formations = require("../models/Formations");
+const Users = require("../models/User");
 
 const generateNewAssignement = async (user, formation) => {
   const newAssignement = FormationHistory.create({
@@ -9,4 +11,28 @@ const generateNewAssignement = async (user, formation) => {
   else throw Error("Formation non assigné");
 }
 
-module.exports = {generateNewAssignement}
+const getFormationsByUser = async(req, res) => {
+ const id = req.user.id
+  const FormationsObject = await FormationHistory.aggregate([
+    { $match: { user_id: {id} } },
+    {
+        $lookup: {
+            from:  "formations" ,
+            localField: "formation_id",
+            foreignField: "_id",
+            as: "infoFormation"
+        }
+    },
+  
+])
+
+    
+    if(!FormationsObject || FormationsObject == 0) res.status(404).send("no formations in your archive")
+
+    res.status(200).send({FormationsObject})
+}
+
+module.exports = {
+                  generateNewAssignement,
+                  getFormationsByUser
+                }
