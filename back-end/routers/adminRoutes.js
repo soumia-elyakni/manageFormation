@@ -6,13 +6,16 @@ const {
 } = require('../controllers/userControllers')
 
 const {
-    addOrganisme
+    addOrganisme,
+    getAllOrganisme
 } = require('../controllers/organismeControllers')
 
 // require fichier outils/
 const uploade = require('../outils/implode-image')
 const {
-    addFormation
+    addFormation,
+    getAllFormation,
+    getFormationByStatus
 } = require('../controllers/formationControllers')
 
 const {
@@ -23,11 +26,15 @@ const {
 const {tryCatch} =require('../middlewares/try-catch')
 
 
-router.get('/getUser', authenticate, tryCatch(getUserById))
+router.get('/get-user', authenticate, tryCatch(getUserById))
+router.get('/get-organismes', authenticate, checkAdmin, tryCatch(getAllOrganisme))
+router.get('/get-allformations', authenticate, checkAdmin, tryCatch(getAllFormation))
+router.post('/get-formations', authenticate, checkAdmin, tryCatch(getFormationByStatus))
 router.post('/add-employe', authenticate, checkAdmin, tryCatch(addEmploye))
 router.post('/add-organisme', authenticate, checkAdmin, tryCatch(addOrganisme))
 router.post('/add-formation', authenticate, checkAdmin, uploade.single('image') ,tryCatch(addFormation))
 router.put('/new-userFormation/:userId', authenticate, checkAdmin, tryCatch(newUserFormation))
+
 
 
 module.exports = router
