@@ -57,6 +57,28 @@ const updateAllStatus = async(req, res) => {
   })
 }
 
+const getAllFormation = async (req, res) => {
+  const formations = await Formations.find()
+  if(!formations || formations == 0) res.status(404).send("tableau formations vide")
+
+  res.status(200).send({formations})
+}
+
+const getFormationByStatus = async (req, res) => {
+  const { status } = req.body; 
+
+  try {
+    const formations = await Formations.find({ status });
+    if (!formations || formations == 0) return res.status(404).send(`aucune formation ${status}`);
+
+    res.status(200).send({ formations });
+  } catch (err) {
+    res.status(500).send("Error retrieving formations");
+  }
+}
+
 module.exports = { addFormation,
                    updateStatus,
-                   updateAllStatus  };
+                   updateAllStatus,
+                   getAllFormation,
+                   getFormationByStatus  };
