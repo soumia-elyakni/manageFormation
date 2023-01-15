@@ -5,6 +5,7 @@ import { Dashboard } from "./components/pages/admin/Dashboard";
 
 import PrivateRoutes from "./components/private/privateRoute";
 import { EmployeBoard } from "./components/pages/employe/EmployeBoard";
+import { AddEmploye } from "./components/tools/AddEmploye";
 
 
 function App() {
@@ -19,7 +20,7 @@ function App() {
       
       <Route element={<PrivateRoutes role="admin" />}>
       <Route path="/admin" element={<Dashboard />}>
-              
+             <Route path="addEmploye" element={<AddEmploye/>} />
       </Route>
       </Route>
 
