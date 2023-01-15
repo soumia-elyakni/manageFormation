@@ -11,4 +11,12 @@ const addOrganisme = async (req, res) => {
      console.log({ organisme })
 };
 
-module.exports = { addOrganisme };
+const getAllOrganisme = async (req, res) => {
+  const organismes = await Organismes.find()
+  if(!organismes || organismes == 0) res.status(404).send("tableau organismes vide")
+
+  res.status(200).send({organismes})
+}
+
+module.exports = { addOrganisme,
+                   getAllOrganisme };
