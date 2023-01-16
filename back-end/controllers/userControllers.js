@@ -71,8 +71,19 @@ const addEmploye = async (req, res) => {
     })
   }
 
+  const getEmployes = async(req, res) => {
+    const role = await Roles.find({name : "employe"})
+    const employes = await Users.find({role_id : role._id})
+
+    if(!employes || employes == 0) res.status(404).send("Aucun employe trouvé")
+
+    res.status(200).send(employes)
+
+  }
+
 module.exports = {  
   addEmploye,
   newUserFormation,
-  getUserById
+  getUserById,
+  getEmployes
  }
