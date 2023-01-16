@@ -67,14 +67,12 @@ const getAllFormation = async (req, res) => {
 const getFormationByStatus = async (req, res) => {
   const { status } = req.body; 
 
-  try {
+
     const formations = await Formations.find({ status });
     if (!formations || formations == 0) return res.status(404).send(`aucune formation ${status}`);
 
     res.status(200).send({ formations });
-  } catch (err) {
-    res.status(500).send("Error retrieving formations");
-  }
+  
 }
 
 module.exports = { addFormation,
