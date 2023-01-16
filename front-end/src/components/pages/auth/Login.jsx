@@ -50,7 +50,7 @@ function Login() {
   
   return (
     <div className='d-flex w-50 mx-auto align-content-center'>
-    <form onSubmit={handleSubmit} className="w-100 d-flex flex-column bg-light  ">
+    <form onSubmit={handleSubmit} className="w-100 d-flex flex-column bg-light">
     <Input type="email" name="email" placeholder="your email here" value={formData.email} onChange={handleChange} />
     <Input type="password" name="password" placeholder="your password here" value={formData.password} onChange={handleChange} />
     <Button type="submit"  className="bg-success" value="Login"/>
