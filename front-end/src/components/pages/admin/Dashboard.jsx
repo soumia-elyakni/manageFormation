@@ -1,30 +1,34 @@
-import React, { useEffect } from 'react'
-import { useSelector } from 'react-redux/es/exports';
-import { Navigate } from 'react-router-dom'
-import { useState } from 'react';
-import getAdminBoard from '../../../services/user-services'
+// import { Navigate } from 'react-router-dom'
+import { Outlet } from 'react-router-dom';
+import { AdminSidebar } from '../../tools/AdminSidebar';
+import { ActiveUser } from '../../tools/ActiveUser';
 
 export const Dashboard = () => {
-  const isLogged = useSelector((state)=> state.auth.isLogged)
-  const role = useSelector((state)=> state.auth.user.role)
-  
-
-  const [content, setContent] = useState({})
-
-  useEffect(()=>{
-    getAdminBoard()
-    .then((Response)=>{
-      setContent(Response.data)
-    },
-    (error) => {
-
-    }
-    )
-  })
-   
-  if(!isLogged) return  <Navigate to="/login" />
-
+ 
   return (
-    <div>Hello {content}  </div>
+    <div className='d-flex flex-row w-100 p-3 pt-4'>
+
+      <div className='d-flex flex-column col-3'>
+
+      <div>
+         <ActiveUser/>
+      </div>
+
+       <div>
+        <AdminSidebar/>
+      </div>
+
+      </div>
+
+      <div className='w-100 bg-success col-9 p-4 pt-5'>
+        <Outlet/>
+      </div>
+      
+    </div>
+
+   
+
+    
+
   )
 }
