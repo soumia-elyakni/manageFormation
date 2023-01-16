@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Login from "./components/pages/auth/Login"
 import { Dashboard } from "./components/pages/admin/Dashboard";
 
@@ -12,36 +12,34 @@ import { Organismeslist } from "./components/pages/admin/Organismeslist";
 
 function App() {
   return (
-    
-      <Router>
-        <Routes>
 
-      <Route path="" element={<Login />} />
-      <Route path="login" element={<Login />} />
+  
+      <Routes>
 
-      <Route path="/admin" element={<Dashboard />}>
-        <Route path="addEmploye" element={<AddEmploye/>} />
-        <Route path="addOrganisme" element={<AddOrganisme/>} />
-        <Route path="organismes" element={<Organismeslist/>} />
-      </Route>
+        <Route path="/" element={<Login />} />
+        <Route path="login" element={<Login />} />
+
+        <Route path="/admin" element={<Dashboard />}>
+          <Route path="addEmploye" element={<AddEmploye />} />
+          <Route path="addOrganisme" element={<AddOrganisme />} />
+          <Route path="organismes" element={<Organismeslist />} />
+        </Route>
 
 
-      
-      {/* <Route element={<PrivateRoutes role="admin" />}>
-      <Route path="/admin" element={<Dashboard />}>
-             
-      </Route>
-      </Route> */}
 
-      <Route element={<PrivateRoutes role="employe" />}>
-      <Route path="/employe" element={<EmployeBoard />}>
-              
-      </Route>
-      </Route>
+              {/* <Route element={<PrivateRoutes role="admin" />}>
+            <Route path="/admin" element={<Dashboard />}>
+                  
+            </Route>
+            </Route> */}
 
-       </Routes>
-      </Router>
-    
+        <Route element={<PrivateRoutes role="employe" />}>
+          <Route path="/employe" element={<EmployeBoard />}> </Route>
+        </Route>
+
+      </Routes>
+   
+
   );
 }
 
