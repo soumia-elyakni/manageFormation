@@ -2,7 +2,8 @@ const router = require('express').Router()
 const {
     addEmploye,
     newUserFormation,
-    getUserById
+    getUserById,
+    getEmployes
 } = require('../controllers/userControllers')
 
 const {
@@ -30,6 +31,7 @@ router.get('/get-user', authenticate, tryCatch(getUserById))
 router.get('/get-organismes', authenticate, checkAdmin, tryCatch(getAllOrganisme))
 router.get('/get-allformations', authenticate, checkAdmin, tryCatch(getAllFormation))
 router.post('/get-formations', authenticate, checkAdmin, tryCatch(getFormationByStatus))
+router.get('get-employes', authenticate, checkAdmin, tryCatch(getEmployes))
 router.post('/add-employe', authenticate, checkAdmin, tryCatch(addEmploye))
 router.post('/add-organisme', authenticate, checkAdmin, tryCatch(addOrganisme))
 router.post('/add-formation', authenticate, checkAdmin, uploade.single('image') ,tryCatch(addFormation))
