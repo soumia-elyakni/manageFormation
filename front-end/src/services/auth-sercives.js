@@ -1,5 +1,4 @@
 import axios from "axios";
-import authHeader from "./auth-header";
 
 const API_URL = "/api/auth/";
 
@@ -10,12 +9,14 @@ const login = async(email, password) => {
       password,
     })
       localStorage.setItem('user', JSON.stringify(log.data))
+      localStorage.setItem('token', JSON.stringify(log.data.token))
+
       return log;
 };
 
 const logout = async () => {
    
-  return await localStorage.removeItem('user')
+  return localStorage.clear()
   
 }
 
