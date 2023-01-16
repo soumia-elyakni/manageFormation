@@ -3,11 +3,15 @@ import axios from "axios";
 const API_URL = "/api/admin/";
 
 const getAllOrganisme = () => {
-    return axios.get(API_URL + "get-organismes");
+    return axios.get(API_URL + "get-organismes", {
+        headers: {
+            authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+    });
   };
 
-const addOrganisme = () => {
-    return axios.post(API_URL + "add-organisme")
+const addOrganisme = async (organisme) => {
+    return await axios.post(API_URL + "add-organisme", organisme)
 };
 
 const addEmploye = () => {
