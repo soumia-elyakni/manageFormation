@@ -13,7 +13,7 @@ const getAdminBoard = () => {
   return axios.get(API_URL + "admin/get-user", { headers: authHeader() });
 };
 
-export default {
+export  {
   getEmployeBoard,
   getAdminBoard
 };
