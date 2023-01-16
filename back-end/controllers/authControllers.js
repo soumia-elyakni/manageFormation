@@ -4,8 +4,11 @@ const Roles = require('../models/Role')
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
+
 const Login = async(req, res) => {
     const { body } = req;
+    
+   
 
     if (!body.email || !body.password) res.status(400).send({ error: "Fill all Inputs" })
 
@@ -24,9 +27,11 @@ const Login = async(req, res) => {
     
     res.setHeader("Authorization", 'Bearer ' + token)  
 
-   
+    
     res.status(200).send({ 
                 role: role.name,
+                name : userExist.first_name +' '+userExist.last_name ,
+                email : userExist.email ,
                 token : ("Authorization", 'Bearer ' + token)
              })
     
