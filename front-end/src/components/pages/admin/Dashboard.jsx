@@ -20,7 +20,7 @@ export const Dashboard = () => {
 
       </div>
 
-      <div className='w-100 bg-success col-9 p-4 pt-5'>
+      <div className='col-9 p-4 pt-5'>
         <Outlet/>
       </div>
       
