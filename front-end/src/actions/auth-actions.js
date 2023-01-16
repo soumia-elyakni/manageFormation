@@ -1,5 +1,6 @@
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILED = 'LOGIN_FAILED';
+export const LOGOUT = 'LOGOUT'
 
 
 const loginSuccess = (data) => {
@@ -16,8 +17,15 @@ const loginSuccess = (data) => {
     };
   }
 
+  const logoutAction = () => {
+    return {
+      type : LOGOUT,
+    }
+  }
+
   export  {
     loginSuccess,
-    loginFailed
+    loginFailed,
+    logoutAction
   }
 
