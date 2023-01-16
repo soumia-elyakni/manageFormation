@@ -29,11 +29,11 @@ const Login = async(req, res) => {
 
     
     res.status(200).send({ 
-                role: role.name,
-                name : userExist.first_name +' '+userExist.last_name ,
-                email : userExist.email ,
-                token : ("Authorization", 'Bearer ' + token)
-             })
+        role: role.name,
+        name : userExist.first_name +' '+userExist.last_name ,
+        email : userExist.email ,
+        token
+     })
     
 }
 
