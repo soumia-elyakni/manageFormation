@@ -1,10 +1,11 @@
 
-import { LOGIN_SUCCESS, LOGIN_FAILED } from '../actions/auth-actions';
+import { LOGIN_SUCCESS, LOGIN_FAILED, LOGOUT } from '../actions/auth-actions';
 
-const initialState = {
-  isLogged: false,
-  user: null,
-};
+let user = JSON.parse(localStorage.getItem('user'))
+
+const initialState = user
+  ? {isLogged: true, user: user}
+  : {isLogged: false, user: null}
 
 export function authReducer(state = initialState, action) {
   switch (action.type) {
@@ -23,6 +24,12 @@ export function authReducer(state = initialState, action) {
           user: null,
           error: action.payload.error,
         };
+        case LOGOUT:
+          return {
+            ...state,
+            isLogged: false,
+            user: null,
+          };
 
     default:
       return state;
