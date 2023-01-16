@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-export const Input = props => {
+ const Input = props => {
   return (
     <input
       type={props.type}
@@ -14,4 +14,4 @@ export const Input = props => {
   )
 }
 
-
+export {Input}
