@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { login } from '../../../services/auth-sercives'
 import { loginFailed, loginSuccess } from '../../../actions/auth-actions'
 import { Input } from '../../common/Input'
-import Button from '../../common/Button'
+import {Button} from '../../common/Button'
 
 
 function Login() {
