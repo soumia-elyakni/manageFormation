@@ -4,7 +4,7 @@ import { logout } from "../../services/auth-sercives";
 import { logoutAction } from "../../actions/auth-actions";
 import { useDispatch, useSelector } from "react-redux";
 // import { useState, useEffect } from "react";
-import Button from "../common/Button";
+import {Button} from "../common/Button";
 
 export const ActiveUser = () => {
        const dispatch = useDispatch()
