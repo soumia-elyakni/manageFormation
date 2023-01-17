@@ -16,7 +16,7 @@ const addEmploye = async (req, res) => {
     !body.password ||
     !body.first_name ||
     !body.last_name ||
-    !body.organisme_id
+    !body.organisme
   ) throw Error("Fill All Inputs")
 
   const userExist = await Users.findOne({ email: body.email });
@@ -25,7 +25,7 @@ const addEmploye = async (req, res) => {
   const role = await Roles.findOne({ name : "employe"})
   body.role_id = role._id
 
-  const organisme = await Organismes.findOne({ name : body.organisme_id})
+  const organisme = await Organismes.findOne({ name : body.organisme})
   body.organisme_id = organisme._id
 
   const unhashPassword = body.password;
@@ -36,6 +36,7 @@ const addEmploye = async (req, res) => {
     if(!newUser) throw Error('User not created')
     storage("unhashPassword", unhashPassword)
     
+    res.send('created Succefully')
   
 };
 
@@ -72,12 +73,25 @@ const addEmploye = async (req, res) => {
   }
 
   const getEmployes = async(req, res) => {
-    const role = await Roles.find({name : "employe"})
-    const employes = await Users.find({role_id : role._id})
+    
+    const role = await Roles.findOne({name: "employe"}).select("_id")
+    let employes = []
+    const getemployes = await Users.find({role_id : role._id}).populate('organisme_id')
 
-    if(!employes || employes == 0) res.status(404).send("Aucun employe trouvé")
+    if(!getemployes || getemployes == 0) res.status(404).send("Aucun employe trouvé")
 
+    getemployes.forEach((e) => {
+      employes.push({
+        first_name : e.first_name,
+        last_name : e.last_name,
+        email : e.email,
+        organisme : e.organisme_id.name
+      })
+    })
+
+    
     res.status(200).send(employes)
+    
 
   }
 
