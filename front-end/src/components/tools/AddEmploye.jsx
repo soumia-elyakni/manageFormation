@@ -1,46 +1,73 @@
-import React from 'react'
-import {Input} from '../common/Input'
-import Button from '../common/Button'
-// import { useState, useEffect } from 'react'
-// import { getAllOrganisme } from '../../services/admin-services'
+import React from "react";
+import { Input } from "../common/Input";
+import {Button} from "../common/Button";
+import { SelectOrganismes } from "../common/SelectOrganismes";
+import { useState } from "react";
+// import { addEmploye } from "../../services/admin-services";
 
 export const AddEmploye = () => {
-    // const [organismes, setOrganisme] = useState({})
+  const [employe, setEmploye] = useState({
+    first_name: "",
+    last_name: "",
+    email: "",
+    password: "",
+    organisme: "",
+  });
 
-    // useEffect(()=> {
-    //     getAllOrganisme()
-    //     .then((res) => {
-    //         setOrganisme(res.data);
-    //       })
-    //       .catch((err) => {
-    //         console.log(err.msg);
-    //       });
-    // }, [])
+  const handleChange = (e) => {
+    e.preventDefault();
+    const value = e.target.value;
+    setEmploye({
+      ...employe,
+      [e.target.name]: value,
+    });
+  };
 
-    // console.log(organismes)
+    const newEmploye = (e) => {
+      e.preventDefault()
+      console.log(employe)
+      newEmploye(employe)
+        .then((res) => {
+          console.log(res.data)
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+ 
 
   return (
+    <div className="d-flex w-50 mx-auto align-content-center">
+      <form className="w-100 d-flex flex-column bg-light" onSubmit={newEmploye}>
+        <Input
+          type="text"
+          name="first_name"
+          onChange={handleChange}
+          placeholder="First name"
+        />
+        <Input
+          type="text"
+          name="last_name"
+          onChange={handleChange}
+          placeholder="Last name"
+        />
+        <Input
+          type="email"
+          name="email"
+          onChange={handleChange}
+          placeholder="Email"
+        />
+        <Input
+          type="password"
+          name="password"
+          onChange={handleChange}
+          placeholder="Password"
+        />
 
-    <div className='d-flex w-50 mx-auto align-content-center'>
+        <SelectOrganismes onChange={handleChange} name="organisme" />
 
-    <form className="w-100 d-flex flex-column bg-light" onSubmit="">
-        <Input type="text" placeholder="First name"/>
-        <Input type="text" placeholder="Last name" />
-        <Input type="email" placeholder="Email" />
-        <Input type="password" placeholder="Password" />
-
-        <select  placeholder="Organisme" >
-            {/* {
-                organismes.forEach((organisme) => {
-                    <option>{organisme.name}</option>
-                  })
-             
-            } */}
-        </select>
-
-        <Button type="submit"  className="bg-success" value="Send"/>
-
-    </form>
+        <Button type="submit" className="bg-success" value="Send" />
+      </form>
     </div>
-  )
-}
+  );
+};
