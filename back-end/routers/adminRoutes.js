@@ -28,14 +28,14 @@ const {tryCatch} =require('../middlewares/try-catch')
 
 
 router.get('/get-user', authenticate, tryCatch(getUserById))
-router.get('/get-organismes', authenticate, checkAdmin, tryCatch(getAllOrganisme))
-router.get('/get-allformations', authenticate, checkAdmin, tryCatch(getAllFormation))
-router.post('/get-formations', authenticate, checkAdmin, tryCatch(getFormationByStatus))
-router.get('get-employes', authenticate, checkAdmin, tryCatch(getEmployes))
-router.post('/add-employe', authenticate, checkAdmin, tryCatch(addEmploye))
-router.post('/add-organisme', authenticate, checkAdmin, tryCatch(addOrganisme))
-router.post('/add-formation', authenticate, checkAdmin, uploade.single('image') ,tryCatch(addFormation))
-router.put('/new-userFormation/:userId', authenticate, checkAdmin, tryCatch(newUserFormation))
+router.get('/get-organismes', tryCatch(getAllOrganisme))
+router.get('/get-allformations', tryCatch(getAllFormation))
+router.post('/get-formations', tryCatch(getFormationByStatus))
+router.get('/get-employes', tryCatch(getEmployes))
+router.post('/add-employe', tryCatch(addEmploye))
+router.post('/add-organisme', tryCatch(addOrganisme))
+router.post('/add-formation', uploade.single('image') ,tryCatch(addFormation))
+router.put('/new-userFormation/:userId', tryCatch(newUserFormation))
 
 
 

@@ -8,9 +8,9 @@ const login = async(email, password) => {
       email,
       password,
     })
-      localStorage.setItem('user', JSON.stringify(log.data))
-      localStorage.setItem('token', JSON.stringify(log.data.token))
-
+       localStorage.setItem('user', JSON.stringify(log.data))
+       localStorage.setItem('token', JSON.stringify(log.data.token))
+  
       return log;
 };
 

@@ -23,8 +23,8 @@ const FormationSchema = new mongoose.Schema({
 
         status :{
             type : String,
-            enum: ['Prévue', 'En cours','Terminée'],
-            default : "Prévue"
+            enum: ['Prevue', 'En cours','Terminee'],
+            default : "Prevue"
 
         }
 

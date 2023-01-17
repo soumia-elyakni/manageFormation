@@ -6,13 +6,7 @@ import { useState } from "react";
 // import { addEmploye } from "../../services/admin-services";
 
 export const AddEmploye = () => {
-  const [employe, setEmploye] = useState({
-    first_name: "",
-    last_name: "",
-    email: "",
-    password: "",
-    organisme: "",
-  });
+  const [employe, setEmploye] = useState({});
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -38,7 +32,7 @@ export const AddEmploye = () => {
 
   return (
     <div className="d-flex w-50 mx-auto align-content-center">
-      <form className="w-100 d-flex flex-column bg-light" onSubmit={newEmploye}>
+      <form className="w-100 d-flex flex-column bg-light">
         <Input
           type="text"
           name="first_name"
@@ -64,9 +58,10 @@ export const AddEmploye = () => {
           placeholder="Password"
         />
 
-        <SelectOrganismes onChange={handleChange} name="organisme" />
+        <SelectOrganismes onChange={handleChange} setEmploye={(e) => setEmploye(e.target.value)} name="organisme" />
+      
 
-        <Button type="submit" className="bg-success" value="Send" />
+        <Button type="submit" className="bg-success" onClick={newEmploye} value="Send" />
       </form>
     </div>
   );

@@ -1,15 +1,14 @@
-import { useSelector } from 'react-redux';
-import { Outlet, Navigate } from 'react-router-dom';
+import { useSelector } from 'react-redux'
+import { Navigate } from 'react-router-dom'
+import { Outlet } from 'react-router'
 
-export default function PrivateRoutes() {
-  const role = useSelector(state => state.auth.user.role);
-  const isLogged = useSelector(state => state.auth.isLogged)
 
-  if (!isLogged) {
-    return <Navigate to="/login" />;
-  } else if (role === 'admin') {
-    return <Outlet />;
-  } else if (role === 'employe') {
-    return <Outlet />;
-  } 
+ const PrivateRoute = () => {
+  const isLogged = useSelector((state)=> state.auth.isLogged)
+
+  return (
+    (!isLogged) ? <Navigate to='login'/> : <Outlet/>
+  )
 }
+
+export {PrivateRoute}

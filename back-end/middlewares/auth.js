@@ -19,9 +19,8 @@ const authenticate = (req, res, next) => {
 
 const checkAdmin = async (req, res, next) => {
   const userRole = req.user.role;
-  if (userRole !== "admin") {
-      return res.status(401).send("Unauthorized");
-  }
+  if (userRole !== "admin") throw Error("Unauthorized");
+  
   next();
 };
 

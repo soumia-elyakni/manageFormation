@@ -8,15 +8,14 @@ const jwt = require("jsonwebtoken");
 const Login = async(req, res) => {
     const { body } = req;
     
-   
 
-    if (!body.email || !body.password) res.status(400).send({ error: "Fill all Inputs" })
+    if (!body.email || !body.password) throw Error("Fill all Inputs")
 
     const userExist = await Users.findOne({email : body.email})
-    if(!userExist) res.status(400).send({ error: "User email not existed" })
+    if(!userExist) throw Error( "User email not existed" )
 
     const rightPassword = await bcrypt.compare(body.password, userExist.password)
-    if(!rightPassword) res.status(400).send({error : "Wrong Password"})
+    if(!rightPassword) throw Error("Wrong Password")
 
     const role = await Roles.findOne({_id : userExist.role_id})
 
@@ -39,7 +38,7 @@ const Login = async(req, res) => {
 
 const Logout = async (req, res) => {
     res.removeHeader("Authorization");
-    res.send({ message: "User is logouted" });
+    res.json({ message: "User is logouted" });
   };
 
 

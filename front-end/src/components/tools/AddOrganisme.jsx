@@ -16,7 +16,7 @@ export const AddOrganisme = () => {
     e.preventDefault();
     addOrganisme(organisme)
       .then((res) => {
-        console.log(res.data);
+        alert(res.data)
       })
       .catch((err) => {
         console.log(err);

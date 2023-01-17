@@ -13,7 +13,7 @@ const addFormation = async (req, res) => {
 }
 
   if (!body.title || !body.description || !body.date_debut || !body.date_fin)
-    res.send("Fill All Inputs");
+    throw Error("Fill All Inputs");
 
 
 const newFormation = await Formations.create(createFormation)
@@ -29,11 +29,11 @@ const updateStatus = (startDate, endDate) => {
   let newStatus;
 
   if (currentDate.getTime() < startDate.getTime()) {
-    newStatus = 'Prévue';
+    newStatus = 'Prevue';
   } else if (currentDate.getTime() > startDate.getTime() && currentDate.getTime() < endDate.getTime()) {
     newStatus = 'En cours';
   } else if (currentDate.getTime() > endDate.getTime()) {
-    newStatus =   'Terminée';
+    newStatus =   'Termine';
   }
 
   return newStatus
@@ -59,7 +59,7 @@ const updateAllStatus = async(req, res) => {
 
 const getAllFormation = async (req, res) => {
   const formations = await Formations.find()
-  if(!formations || formations == 0) res.status(404).send("tableau formations vide")
+  if(!formations || formations == 0) throw Error("tableau formations vide")
 
   res.status(200).send({formations})
 }
@@ -69,7 +69,7 @@ const getFormationByStatus = async (req, res) => {
 
 
     const formations = await Formations.find({ status });
-    if (!formations || formations == 0) return res.status(404).send(`aucune formation ${status}`);
+    if (!formations || formations == 0) throw Error(`aucune formation ${status}`);
 
     res.status(200).send(formations);
   

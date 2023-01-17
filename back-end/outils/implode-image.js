@@ -2,12 +2,13 @@ const path = require("path");
 const multer = require("multer");
 
 
-//destination file au niveau de image
+
 const storage = multer.diskStorage({
     destination: (req, file, callback) => {
     callback(null, "public/images");
   },
-//override pour ajouter a new image cet function de rename fille 
+
+
   filename: (req, file, callback) => {
     const newImageName  = Date.now() + path.extname(file.originalname);
     callback(null, newImageName);
@@ -16,7 +17,7 @@ const storage = multer.diskStorage({
 });
 
 
-//exports storage configuration et filtrage de image 
+
 
 module.exports =  multer({
   storage: storage,

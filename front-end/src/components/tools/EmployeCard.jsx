@@ -8,12 +8,16 @@ export const EmployeCard = (props) => {
   const [selectFormation, setSelect] = useState(false)
   const [formations, setFormations] = useState([])
 
+
   useEffect(()=>{
-    const status = 'Prévue'
+    const status = 'Prevue'
     getFormationsByStatus(status)
     .then((res)=>{
-        setFormations(res.data)
+        // setFormations(res.data)
         console.log(res.data)
+    })
+    .catch((err)=>{
+      console.log(err.message)
     })
 },[])
 
@@ -38,6 +42,7 @@ export const EmployeCard = (props) => {
           onClick={() => setSelect(true)}
         />
         <form className={!selectFormation ? "d-none" : "w-100"} onSubmit="">
+        {/* <select name="formations">
           {
             formations.map((formation)=>{
               return(
@@ -45,6 +50,7 @@ export const EmployeCard = (props) => {
               )
             })
           }
+          </select> */}
           <Button
             value="send"
             className="bg-success"

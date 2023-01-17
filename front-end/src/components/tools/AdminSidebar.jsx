@@ -14,7 +14,7 @@ export const AdminSidebar = () => {
         Employes
       </Link>
       <Link
-        to="organismes"
+        to="formations"
         className="list-group-item list-group-item-action list-group-item-secondary"
       >
         Formations

@@ -52,7 +52,7 @@ const addEmploye = async (req, res) => {
 
     const user = Users.findOne({_id : userId})
     const currentFormation = Formations.findOne({_id : user.formation_id})
-    if(currentFormation.status == "En cours" || currentFormation.status == "Prévue") throw Error ("l'employé est dejà engagé par une formation")
+    if(currentFormation.status == "En cours" || currentFormation.status == "Prevue") throw Error ("l'employé est dejà engagé par une formation")
 
     const newFormation = await Users.findOneAndUpdate({"_id": userId },  { $set: { formation_id: formationId } })
     if(!newFormation)  throw Error('formation non assigné')
