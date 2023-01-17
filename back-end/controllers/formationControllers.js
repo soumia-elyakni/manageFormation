@@ -71,7 +71,7 @@ const getFormationByStatus = async (req, res) => {
     const formations = await Formations.find({ status });
     if (!formations || formations == 0) return res.status(404).send(`aucune formation ${status}`);
 
-    res.status(200).send({ formations });
+    res.status(200).send(formations);
   
 }
 
