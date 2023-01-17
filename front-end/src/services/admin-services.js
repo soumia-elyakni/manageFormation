@@ -14,16 +14,16 @@ const addOrganisme = async (organisme) => {
     return await axios.post(API_URL + "add-organisme", organisme)
 };
 
-const addEmploye = () => {
-    return axios.post(API_URL + "add-employe")
+const addEmploye = (employe) => {
+    return axios.post(API_URL + "add-employe", employe)
 };
 
 const getEmployes = () => {
-    return axios.get(API_URL + "get-employes")
+    return   axios.get(API_URL +"get-employes")
 };
 
-const getFormationsByStatus = () => {
-    return axios.post(API_URL + "get-formations")
+const getFormationsByStatus = (status) => {
+    return axios.post(API_URL + "get-formations", status )
 };
 
 const getAllFormations = () => {
